@@ -938,8 +938,11 @@ class ProjectSetup:
         additional_vars.update(self._additional_vars.get('all', {}))
 
         engine_vars = self._additional_vars.get(template.engine, {})
+        additional_vars.update(engine_vars.get('all', {}))
         engine_sanitizer_vars = engine_vars.get(template.memory_tool, {})
         additional_vars.update(engine_sanitizer_vars)
+        sanitizer_vars = self._additional_vars.get(template.memory_tool, {})
+        additional_vars.update(sanitizer_vars.get('all',{}))
 
         for key, value in sorted(additional_vars.items()):
           job.environment_string += (
